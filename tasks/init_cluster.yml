@@ -75,11 +75,13 @@
 - name: init_cluster | Initializing Cluster Master
   command: >
            kubeadm init \
+           --ignore-preflight-errors=SystemVerification \
            --apiserver-advertise-address \
            {{ hostvars[inventory_hostname]['k8s_advertise_address'] }} \
            --apiserver-bind-port \
            {{ k8s_advertise_bind_port }} \
-           --token {{ k8s_token }}
+           --token {{ k8s_token }} \
+           --pod-network-cidr=10.244.0.0/16
   register: _k8s_cluster_master_init
   become: true
   no_log: true
