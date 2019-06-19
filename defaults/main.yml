@@ -25,9 +25,9 @@ k8s_debian_repo_info:
   key: "{{ k8s_package_url }}/apt/doc/apt-key.gpg"
   repo: "deb http://apt.kubernetes.io/ kubernetes-{{ ansible_distribution_release|lower }} main"
 
-# https://github.com/kubernetes/helm
-
-# Define architecture to install...amd64|arm
+# Define architecture for helm install package
+# helm allows: amd64 | arm | arm64 | ppc64le | s390x | 386
+# see: https://storage.googleapis.com/kubernetes-helm/
 k8s_helm_architecture: amd64
 
 k8s_helm_install: false
