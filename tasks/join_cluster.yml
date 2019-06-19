@@ -2,6 +2,7 @@
 - name: join_cluster | Joining Additional Nodes To K8s Cluster
   command: >
            kubeadm join \
+           --ignore-preflight-errors=SystemVerification \
            --token {{ k8s_token }} \
            --discovery-token-unsafe-skip-ca-verification \
            {{ hostvars[k8s_master]['k8s_advertise_address'] }}:{{ k8s_advertise_bind_port }}
@@ -16,6 +17,7 @@
 - name: join_cluster | Joining Additional Nodes To K8s Cluster
   command: >
            kubeadm join \
+           --ignore-preflight-errors=SystemVerification \
            --token {{ k8s_token }} \
            {{ hostvars[k8s_master]['k8s_advertise_address'] }}:{{ k8s_advertise_bind_port }}
   args:
