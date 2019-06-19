@@ -3,11 +3,12 @@
 #
 k8s_admin_config: /etc/kubernetes/admin.conf
 
-# Define Ansible group which defines the K8s Cluster
+# Define network interface of each nodes k8s advertise address
 k8s_advertise_address_int: enp0s8
 
 k8s_advertise_bind_port: 6443
 
+# Define Ansible group which defines the K8s Cluster
 k8s_cluster_group: k8s
 
 k8s_cluster_init_skip_ca_verification: false
