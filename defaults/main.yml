@@ -39,6 +39,8 @@ k8s_helm_url: https://kubernetes-helm.storage.googleapis.com
 
 k8s_helm_version: 2.14.0
 
+k8s_master: "{{ groups[k8s_cluster_group][0] }}"  # or e.g. node0
+
 k8s_package_url: https://packages.cloud.google.com
 
 k8s_pod_network_config: "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl version | base64 | tr -d '\n')"
