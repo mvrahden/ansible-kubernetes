@@ -1,25 +1,20 @@
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+**Table of Contents**
 
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-
-**Table of Contents**  _generated with [DocToc](https://github.com/thlorenz/doctoc)_
-
--   [ansible-k8s](#ansible-k8s)
-    -   [Requirements](#requirements)
-    -   [Role Variables](#role-variables)
-    -   [Dependencies](#dependencies)
-    -   [Example Playbook](#example-playbook)
-    -   [Vagrant](#vagrant)
-    -   [Additional Info](#additional-info)
-        -   [Reset `K8s` cluster](#reset-k8s-cluster)
-        -   [Get a list of pods and information on them](#get-a-list-of-pods-and-information-on-them)
-        -   [Kubernetes-Dashboard](#kubernetes-dashboard)
-        -   [Find the port to connect to](#find-the-port-to-connect-to)
-        -   [Inspect the service](#inspect-the-service)
-    -   [License](#license)
-    -   [Author Information](#author-information)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+- [ansible-k8s](#ansible-k8s)
+  - [Side note](#Side-note)
+  - [Requirements](#Requirements)
+  - [Role Variables](#Role-Variables)
+  - [Dependencies](#Dependencies)
+  - [Example Playbook](#Example-Playbook)
+  - [Vagrant](#Vagrant)
+  - [Additional Info](#Additional-Info)
+    - [Reset `k8s` cluster](#Reset-k8s-cluster)
+    - [Get a list of pods and information on them](#Get-a-list-of-pods-and-information-on-them)
+    - [Kubernetes-Dashboard](#Kubernetes-Dashboard)
+    - [Find the port to connect to](#Find-the-port-to-connect-to)
+    - [Inspect the service](#Inspect-the-service)
+  - [License](#License)
+  - [Author Information](#Author-Information)
 
 # ansible-k8s
 
