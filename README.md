@@ -1,35 +1,26 @@
-# ansible-k8s
+# ansible-k8s <!-- omit in toc -->
 
 An [Ansible](https://www.ansible.com) role to deploy [Kubernetes](https://kubernetes.io)  (k8s) on a cluster of debian based systems.
 
 ## Table of Contents <!-- omit in toc -->
 
-- [ansible-k8s](#ansible-k8s)
-  - [Side note](#Side-note)
+- [Side notes](#Side-notes)
+- [Role Variables](#Role-Variables)
+- [Dependencies](#Dependencies)
+- [Use the `Vagrant` Playground](#Use-the-Vagrant-Playground)
   - [Requirements](#Requirements)
-  - [Role Variables](#Role-Variables)
-  - [Dependencies](#Dependencies)
-  - [Example Playbook](#Example-Playbook)
-  - [Vagrant](#Vagrant)
-  - [Additional Info](#Additional-Info)
-    - [Reset `k8s` cluster](#Reset-k8s-cluster)
-    - [Get a list of pods and information on them](#Get-a-list-of-pods-and-information-on-them)
-  - [License](#License)
-  - [Author Information](#Author-Information)
+  - [How to use it](#How-to-use-it)
+- [Additional Info](#Additional-Info)
+  - [Reset `k8s` cluster](#Reset-k8s-cluster)
+  - [Get a list of pods and information on them](#Get-a-list-of-pods-and-information-on-them)
+- [License](#License)
+- [Author Information](#Author-Information)
 
-## Side note
+## Side notes
 
 - By default [coreos/flannel](https://coreos.com/flannel/docs/latest/) is used for
   the pod networking.
 - but this role is as well compatible to [weaveworks/weave](https://www.weave.works/docs/net/latest/kube-addon/).
-
-## Requirements
-
-Install additional required [Ansible](https://www.ansible.com) roles:
-
-```bash
-sudo ansible-galaxy install -r requirements.yml
-```
 
 ## Role Variables
 
@@ -39,39 +30,7 @@ sudo ansible-galaxy install -r requirements.yml
 
 None
 
-## Example Playbook
-
-```yaml
----
-- hosts: k8s
-  # become: true
-  vars:
-    # Define Docker version to install
-    docker_version: '1.12.6'
-    # Defines if all nodes in play should be added to each hosts /etc/hosts
-    etc_hosts_add_all_hosts: true
-    etc_hosts_pri_dns_name: '{{ pri_domain_name }}'
-    # Defines if node has static IP.
-    etc_hosts_static_ip: true
-    # Defines if ansible_default_ipv4.address is used for defining hosts
-    etc_hosts_use_default_ip_address: false
-    # Defines if ansible_ssh_host is used for defining hosts
-    etc_hosts_use_ansible_ssh_host: true
-    pri_domain_name: 'test.vagrant.local'
-  roles:
-    - role: ansible-etc-hosts
-    - role: ansible-change-hostname
-    - role: ansible-docker
-    - role: ansible-k8s
-  tasks:
-```
-
-## Vagrant
-
-- Requirements
-  - [Ansible](https://www.ansible.com)
-  - [Vagrant](https://www.vagrantup.com/)
-  - [Virtualbox](https://www.virtualbox.org/)
+## Use the `Vagrant` Playground
 
 Included in the `Vagrant` folder is a testing environment with `3` nodes.
 
@@ -79,10 +38,28 @@ Included in the `Vagrant` folder is a testing environment with `3` nodes.
 - `node1` - K8s Cluster Member (`192.168.250.11`)
 - `node2` - K8s Cluster Member (`192.168.250.12`)
 
-You can easily spin this up for learning purposes:
+The folder includes an examplary `Ansible` playbook.
+
+### Requirements
+
+Packages installed on your system:
+
+  - [Ansible](https://www.ansible.com)
+  - [Vagrant](https://www.vagrantup.com/)
+  - [Virtualbox](https://www.virtualbox.org/)
+
+### How to use it
+
+`cd` into that directory and install additional required [Ansible](https://www.ansible.com) roles:
 
 ```bash
 cd Vagrant/
+sudo ansible-galaxy install -r requirements.yml
+```
+
+Now you can easily spin this up for learning purposes:
+
+```bash
 vagrant up
 ```
 
