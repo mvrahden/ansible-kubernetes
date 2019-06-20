@@ -187,7 +187,7 @@ ansible-playbook -i hosts playbook.yml --tags k8s_pods
                     }
                 }
             },
-            ...
+            /* ... */
         ]
     }
 }
