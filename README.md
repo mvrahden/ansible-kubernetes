@@ -18,8 +18,7 @@
 
 # ansible-k8s
 
-An [Ansible](https://www.ansible.com) role to deploy a
-[Kubernetes](https://kubernetes.io) - K8s Cluster
+An [Ansible](https://www.ansible.com) role to deploy a [Kubernetes](https://kubernetes.io)  (k8s) on a cluster of debian based systems.
 
 -   [Weave-Net](https://www.weave.works/docs/net/latest/kube-addon/) is used for
     the network overlay currently
@@ -387,8 +386,5 @@ MIT
 
 ## Author Information
 
-Larry Smith Jr.
-
--   [EverythingShouldBeVirtual](http://everythingshouldbevirtual.com)
--   [@mrlesmithjr](https://www.twitter.com/mrlesmithjr)
--   <mailto:mrlesmithjr@gmail.com>
+- Larry Smith Jr.
+- Menno van Rahden
