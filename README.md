@@ -1,4 +1,8 @@
-**Table of Contents**
+# ansible-k8s
+
+An [Ansible](https://www.ansible.com) role to deploy [Kubernetes](https://kubernetes.io)  (k8s) on a cluster of debian based systems.
+
+## Table of Contents <!-- omit in toc -->
 
 - [ansible-k8s](#ansible-k8s)
   - [Side note](#Side-note)
@@ -12,10 +16,6 @@
     - [Get a list of pods and information on them](#Get-a-list-of-pods-and-information-on-them)
   - [License](#License)
   - [Author Information](#Author-Information)
-
-# ansible-k8s
-
-An [Ansible](https://www.ansible.com) role to deploy a [Kubernetes](https://kubernetes.io)  (k8s) on a cluster of debian based systems.
 
 ## Side note
 
