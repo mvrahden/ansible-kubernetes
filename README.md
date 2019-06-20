@@ -10,9 +10,6 @@
   - [Additional Info](#Additional-Info)
     - [Reset `k8s` cluster](#Reset-k8s-cluster)
     - [Get a list of pods and information on them](#Get-a-list-of-pods-and-information-on-them)
-    - [Kubernetes-Dashboard](#Kubernetes-Dashboard)
-    - [Find the port to connect to](#Find-the-port-to-connect-to)
-    - [Inspect the service](#Inspect-the-service)
   - [License](#License)
   - [Author Information](#Author-Information)
 
@@ -307,76 +304,6 @@ ansible-playbook -i hosts playbook.yml --tags k8s_pods
             }
         ]
     }
-}
-```
-
-### [Kubernetes-Dashboard](https://github.com/kubernetes/dashboard)
-
-The [Kubernetes-Dashboard](https://github.com/kubernetes/dashboard) is installed
-during the install and available for usage. In order to find out where/how to
-connect to the dashboard seems to involve the following.
-
-### Find the port to connect to
-
-```bash
-vagrant ssh node0
-
-kubectl get services --all-namespaces
-...
-NAMESPACE     NAME                   TYPE        CLUSTER-IP    EXTERNAL-IP   PORT(S)         AGE
-default       kubernetes             ClusterIP   10.96.0.1     <none>        443/TCP         6m
-kube-system   kube-dns               ClusterIP   10.96.0.10    <none>        53/UDP,53/TCP   6m
-kube-system   kubernetes-dashboard   ClusterIP   10.97.72.90   <none>        443/TCP         4m
-```
-
-We can see the port is `80:32285` from above.
-
-> NOTE: The above only works for later versions of the dashboard. Reference the
-> [Accessing-Dashboard#nodeport](https://github.com/kubernetes/dashboard/wiki/Accessing-Dashboard---1.7.X-and-above#nodeport) for more info on doing this as of later versions.
->
-> INFO: This way of accessing Dashboard is only recommended for development environments in a single node setup.
-
-### Inspect the service
-
-```bash
-kubectl describe services kubernetes-dashboard --namespace=kube-system
-...
-Name:              kubernetes-dashboard
-Namespace:         kube-system
-Labels:            k8s-app=kubernetes-dashboard
-Annotations:       kubectl.kubernetes.io/last-applied-configuration={"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"labels":{"k8s-app":"kubernetes-dashboard"},"name":"kubernetes-dashboard","namespace":...
-Selector:          k8s-app=kubernetes-dashboard
-Type:              ClusterIP
-IP:                10.97.72.90
-Port:              <unset>  443/TCP
-TargetPort:        8443/TCP
-Endpoints:         10.36.0.1:8443
-Session Affinity:  None
-Events:            <none>
-```
-
-You can then connect to [Dashboard](https://192.168.250.10:32285) for this example.
-
-> NOTE: In order to login using a token reference the following [link](https://github.com/kubernetes/dashboard/wiki/Access-control#bearer-token)
->
-> NOTE: To login with admin privileges reference the following [link](https://github.com/kubernetes/dashboard/wiki/Access-control#admin-privileges)
-
-The `32285` port changes every new deployment of the dashboard so you will
-need to discover what that new port is. Or you can run the following to report
-on the usable link:
-
-```bash
-ansible-playbook -i hosts playbook.yml --tags k8s_get_dashboard
-```
-
-Which will result in the following after the play finishes:
-
-```bash
-TASK [ansible-k8s : reports | Dashboard] ***************************************
-skipping: [node1]
-skipping: [node2]
-ok: [node0] => {
-    "msg": "Kubernetes Dashboard Can be reached at: http://192.168.250.10:30467\n"
 }
 ```
 
