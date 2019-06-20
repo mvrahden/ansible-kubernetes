@@ -22,5 +22,5 @@
     - role: ansible-timezone
     - role: ansible-ntp
     - role: ansible-docker
-    - role: ansible-k8s
+    - role: ansible-kubernetes
   tasks:

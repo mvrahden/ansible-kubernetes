@@ -1,6 +1,13 @@
 ---
 - src: https://www.github.com/mrlesmithjr/ansible-change-hostname.git
+  name: ansible-change-hostname
 - src: https://www.github.com/mrlesmithjr/ansible-docker.git
+  name: ansible-docker
 - src: https://www.github.com/mrlesmithjr/ansible-etc-hosts.git
+  name: ansible-etc-hosts
 - src: https://www.github.com/mrlesmithjr/ansible-ntp.git
+  name: ansible-ntp
 - src: https://www.github.com/mrlesmithjr/ansible-timezone.git
+  name: ansible-timezone
+- src: https://www.github.com/mvrahden/ansible-kubernetes.git
+  name: ansible-kubernetes
