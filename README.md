@@ -17,8 +17,11 @@
 
 An [Ansible](https://www.ansible.com) role to deploy a [Kubernetes](https://kubernetes.io)  (k8s) on a cluster of debian based systems.
 
--   [Weave-Net](https://www.weave.works/docs/net/latest/kube-addon/) is used for
-    the network overlay currently
+## Side note
+
+- By default [coreos/flannel](https://coreos.com/flannel/docs/latest/) is used for
+  the pod networking.
+- but this role is as well compatible to [weaveworks/weave](https://www.weave.works/docs/net/latest/kube-addon/).
 
 ## Requirements
 
@@ -65,16 +68,16 @@ None
 
 ## Vagrant
 
--   Requirements
-    -   [Ansible](https://www.ansible.com)
-    -   [Vagrant](https://www.vagrantup.com/)
-    -   [Virtualbox](https://www.virtualbox.org/)
+- Requirements
+  - [Ansible](https://www.ansible.com)
+  - [Vagrant](https://www.vagrantup.com/)
+  - [Virtualbox](https://www.virtualbox.org/)
 
 Included in the `Vagrant` folder is a testing environment with `3` nodes.
 
--   `node0` - K8s Cluster Master (`192.168.250.10`)
--   `node1` - K8s Cluster Member (`192.168.250.11`)
--   `node2` - K8s Cluster Member (`192.168.250.12`)
+- `node0` - K8s Cluster Master (`192.168.250.10`)
+- `node1` - K8s Cluster Member (`192.168.250.11`)
+- `node2` - K8s Cluster Member (`192.168.250.12`)
 
 You can easily spin this up for learning purposes:
 
@@ -91,9 +94,9 @@ skipping: [node1]
 ok: [node0] => {
     "_k8s_cluster_nodes['stdout_lines']": [
         "NAME      STATUS     AGE       VERSION",
-        "node0     Ready      1m        v1.6.1",
-        "node1     NotReady   4s        v1.6.1",
-        "node2     NotReady   6s        v1.6.1"
+        "node0     Ready      1m        v1.14.1",
+        "node1     NotReady   4s        v1.14.1",
+        "node2     NotReady   6s        v1.14.1"
     ],
     "changed": false
 }
@@ -119,9 +122,9 @@ skipping: [node2]
 ok: [node0] => {
     "_k8s_cluster_nodes['stdout_lines']": [
         "NAME      STATUS    ROLES     AGE       VERSION",
-        "node0     Ready     master    3m        v1.9.0",
-        "node1     Ready     <none>    2m        v1.9.0",
-        "node2     Ready     <none>    2m        v1.9.0"
+        "node0     Ready     master    3m        v1.14.3",
+        "node1     Ready     <none>    2m        v1.14.3",
+        "node2     Ready     <none>    2m        v1.14.3"
     ]
 }
 ```
@@ -147,7 +150,7 @@ When you are all done using the environment easily tear it down:
 
 ## Additional Info
 
-### Reset `K8s` cluster
+### Reset `k8s` cluster
 
 ```bash
 ansible-playbook -i hosts playbook.yml --tags k8s_reset -e "k8s_reset_cluster=true"
@@ -173,7 +176,7 @@ ansible-playbook -i hosts playbook.yml --tags k8s_pods
             },
             {
                 "hostIP": "192.168.250.10",
-                "image": "gcr.io/google_containers/kube-apiserver-amd64:v1.9.0",
+                "image": "gcr.io/google_containers/kube-apiserver-amd64:v1.14.3",
                 "name": "kube-apiserver",
                 "nodeName": "node0",
                 "phase": "Running",
@@ -184,124 +187,7 @@ ansible-playbook -i hosts playbook.yml --tags k8s_pods
                     }
                 }
             },
-            {
-                "hostIP": "192.168.250.10",
-                "image": "gcr.io/google_containers/kube-controller-manager-amd64:v1.9.0",
-                "name": "kube-controller-manager",
-                "nodeName": "node0",
-                "phase": "Running",
-                "podIP": "192.168.250.10",
-                "resources": {
-                    "requests": {
-                        "cpu": "200m"
-                    }
-                }
-            },
-            {
-                "hostIP": "192.168.250.10",
-                "image": "gcr.io/google_containers/k8s-dns-kube-dns-amd64:1.14.7",
-                "name": "kubedns",
-                "nodeName": "node0",
-                "phase": "Running",
-                "podIP": "10.32.0.2",
-                "resources": {
-                    "limits": {
-                        "memory": "170Mi"
-                    },
-                    "requests": {
-                        "cpu": "100m",
-                        "memory": "70Mi"
-                    }
-                }
-            },
-            {
-                "hostIP": "192.168.250.12",
-                "image": "gcr.io/google_containers/kube-proxy-amd64:v1.9.0",
-                "name": "kube-proxy",
-                "nodeName": "node2",
-                "phase": "Running",
-                "podIP": "192.168.250.12",
-                "resources": {}
-            },
-            {
-                "hostIP": "192.168.250.11",
-                "image": "gcr.io/google_containers/kube-proxy-amd64:v1.9.0",
-                "name": "kube-proxy",
-                "nodeName": "node1",
-                "phase": "Running",
-                "podIP": "192.168.250.11",
-                "resources": {}
-            },
-            {
-                "hostIP": "192.168.250.10",
-                "image": "gcr.io/google_containers/kube-proxy-amd64:v1.9.0",
-                "name": "kube-proxy",
-                "nodeName": "node0",
-                "phase": "Running",
-                "podIP": "192.168.250.10",
-                "resources": {}
-            },
-            {
-                "hostIP": "192.168.250.10",
-                "image": "gcr.io/google_containers/kube-scheduler-amd64:v1.9.0",
-                "name": "kube-scheduler",
-                "nodeName": "node0",
-                "phase": "Running",
-                "podIP": "192.168.250.10",
-                "resources": {
-                    "requests": {
-                        "cpu": "100m"
-                    }
-                }
-            },
-            {
-                "hostIP": "192.168.250.12",
-                "image": "k8s.gcr.io/kubernetes-dashboard-amd64:v1.8.1",
-                "name": "kubernetes-dashboard",
-                "nodeName": "node2",
-                "phase": "Running",
-                "podIP": "10.36.0.1",
-                "resources": {}
-            },
-            {
-                "hostIP": "192.168.250.10",
-                "image": "weaveworks/weave-kube:2.1.3",
-                "name": "weave",
-                "nodeName": "node0",
-                "phase": "Running",
-                "podIP": "192.168.250.10",
-                "resources": {
-                    "requests": {
-                        "cpu": "10m"
-                    }
-                }
-            },
-            {
-                "hostIP": "192.168.250.11",
-                "image": "weaveworks/weave-kube:2.1.3",
-                "name": "weave",
-                "nodeName": "node1",
-                "phase": "Running",
-                "podIP": "192.168.250.11",
-                "resources": {
-                    "requests": {
-                        "cpu": "10m"
-                    }
-                }
-            },
-            {
-                "hostIP": "192.168.250.12",
-                "image": "weaveworks/weave-kube:2.1.3",
-                "name": "weave",
-                "nodeName": "node2",
-                "phase": "Running",
-                "podIP": "192.168.250.12",
-                "resources": {
-                    "requests": {
-                        "cpu": "10m"
-                    }
-                }
-            }
+            ...
         ]
     }
 }
