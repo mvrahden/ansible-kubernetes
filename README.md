@@ -54,7 +54,7 @@ Packages installed on your system:
 
 ```bash
 cd Vagrant/
-sudo ansible-galaxy install -r requirements.yml
+ansible-galaxy install -r requirements.yml
 ```
 
 Now you can easily spin this up for learning purposes:
