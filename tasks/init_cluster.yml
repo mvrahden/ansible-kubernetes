@@ -92,7 +92,8 @@
 ##### Below is commented out as I do not think this is any longer needed and was
 ##### used for the template only...Causes failures in it's current state after
 ##### initial cluster is built. This is because we generate a token which is not
-##### saved to the cluster. Might have to use kubeadm token create instead.
+##### saved to the cluster.
+##### Might have to use `kubeadm token create` instead.
 
 
 # - name: init_cluster | Capturing Existing Bootstrap Token
