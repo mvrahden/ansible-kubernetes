@@ -162,7 +162,7 @@ ansible-playbook -i hosts playbook.yml --tags k8s_reset -e "k8s_reset_cluster=tr
 ansible-playbook -i hosts playbook.yml --tags k8s_pods
 ```
 
-```json
+```javascript
 {
         "containers": [
             {
