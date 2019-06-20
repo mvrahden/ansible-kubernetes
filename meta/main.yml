@@ -1,6 +1,7 @@
 galaxy_info:
-  author: Larry Smith Jr.
-  description: An [Ansible] role to deploy a [Kubernetes] - K8s Cluster
+  author: Menno van Rahden
+  description: >
+    An Ansible role to deploy a Kubernetes (K8s) Cluster with coreos/flannel as overlay-network on debian-based systems.
 
   license: MIT
 
@@ -13,8 +14,21 @@ galaxy_info:
 
   galaxy_tags:
     - clustering
+    - k8s
     - kubernetes
+    - infrastructure
+    - orchestration
+    - paas
+    - saas
     - containers
     - docker
+    - flannel
+    - weave
+    - coreos
+    - debian
+    - amd64
+    - arm64
+    - arm
+    - nginx
 
 dependencies: []
