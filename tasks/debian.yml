@@ -24,13 +24,8 @@
     src: etc/apt/preferences.d/k8s.pref.j2
     dest: /etc/apt/preferences.d/k8s.pref
   become: true
-  register: _k8s_pinned_version
-
-- name: debian | Updating Apt Cache
-  apt:
-    update_cache: true
-  become: true
-  when: _k8s_pinned_version['changed']
+  notify:
+    - debian | Updating Apt Cache
 
 - name: debian | Installing K8s Packages
   apt:
