@@ -1,16 +1,12 @@
 galaxy_info:
   author: Menno van Rahden
+  role_name: kubernetes
   description: >
     An Ansible role to deploy a Kubernetes (K8s) Cluster with coreos/flannel as overlay-network on debian-based systems.
 
   license: MIT
 
   min_ansible_version: 1.2
-
-  platforms:
-    - name: Ubuntu
-      versions:
-        - xenial
 
   galaxy_tags:
     - clustering
