@@ -127,7 +127,7 @@
       stat:
         path: "{{ host_vars_file }}"
       delegate_to: "localhost"
-      register: "host_var"
+      register: _host_var
       become: false
       when: >
             update_host_vars is defined and
@@ -139,7 +139,7 @@
         state: "touch"
       delegate_to: "localhost"
       become: false
-      when: not host_var.stat.exists
+      when: not _host_var.stat.exists
 
     - name: Updating ansible_ssh_host
       lineinfile:
@@ -148,7 +148,7 @@
         line: "ansible_ssh_host{{ ':' }} {{ ansible_eth1.ipv4.address }}"
       delegate_to: "localhost"
       become: false
-      register: "ansible_host_updated_eth1"
+      register: _ansible_host_updated_eth1
       when: >
             (update_host_vars is defined and
             update_host_vars) and
@@ -162,7 +162,7 @@
         line: "ansible_ssh_host{{ ':' }} {{ ansible_enp0s8.ipv4.address }}"
       delegate_to: "localhost"
       become: false
-      register: "ansible_host_updated_enp0s8"
+      register: _ansible_host_updated_enp0s8
       when: >
             (update_host_vars is defined and
             update_host_vars) and
@@ -179,8 +179,8 @@
       when: >
             (update_host_vars is defined and
             update_host_vars) and
-            (ansible_host_updated_eth1.changed or
-              ansible_host_updated_enp0s8.changed)
+            (_ansible_host_updated_eth1.changed or
+              _ansible_host_updated_enp0s8.changed)
 
     - name: Updating ansible_ssh_key
       lineinfile:
