@@ -6,8 +6,6 @@
     - k8s_cluster_ip
     - k8s_cluster_nodes
     - k8s_cluster_services
-    - k8s_dashboard
-    - k8s_get_dashboard
     - k8s_helm
     - k8s_pods
 

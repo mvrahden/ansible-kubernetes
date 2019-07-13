@@ -5,8 +5,6 @@
            get services --all-namespaces -o json
   changed_when: false
   become: true
-  tags:
-    - k8s_get_dashboard
   register: _k8s_get_services_all
   when: k8s_reports['all_service_namespaces']
 
