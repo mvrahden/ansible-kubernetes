@@ -24,8 +24,7 @@
     src: etc/apt/preferences.d/k8s.pref.j2
     dest: /etc/apt/preferences.d/k8s.pref
   become: true
-  notify:
-    - debian | Updating Apt Cache
+  notify: [ "update apt cache" ]
 
 - name: debian | Installing K8s Packages
   apt:
