@@ -8,4 +8,9 @@
 
 - name: swap | Disabling Swap
   command: swapoff -a
+  register: _swap
+  changed_when: >
+    _swap['stdout']
+  failed_when: >
+    _swap['stderr']
   become: true
