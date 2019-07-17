@@ -21,8 +21,7 @@ k8s_debian_packages:
 
 k8s_debian_repo_info:
   key: "{{ k8s_package_url }}/apt/doc/apt-key.gpg"
-  repo: "deb http://apt.kubernetes.io/ kubernetes-{{ _k8s_distro_name|lower }} main"
-_k8s_distro_name: "{{ 'xenial' if ansible_distribution_release in [ 'buster' ] else ansible_distribution_release }}"
+  repo: "deb http://apt.kubernetes.io/ kubernetes-xenial main"
 
 # Define architecture for helm install package
 # helm allows: amd64 | arm | arm64 | ppc64le | s390x | 386
