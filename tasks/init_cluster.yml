@@ -78,7 +78,8 @@
     --apiserver-bind-port \
     {{ k8s_advertise_bind_port }} \
     --token {{ k8s_token }} \
-    --pod-network-cidr=10.244.0.0/16
+    {# see: https://coreos.com/flannel/docs/latest/kubernetes.html #}
+    {{ --pod-network-cidr=10.244.0.0/16 if 'flannel' in k8s_pod_network_config }}
   register: _k8s_cluster_master_init
   become: true
   no_log: true
