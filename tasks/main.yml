@@ -1,43 +1,56 @@
 ---
 # tasks file for ansible-k8s
 
-- include_tasks: set_facts.yml
+- name: Gather required facts
+  include_tasks: set_facts.yml
 
-- include_tasks: debian.yml
+- name: Install K8s resources for Debain
+  include_tasks: debian.yml
   when: >
     ansible_os_family == "Debian"
 
-- include_tasks: services.yml
+- name: Enable K8s services {{ k8s_services }}
+  include_tasks: services.yml
 
-- include_tasks: swap.yml
+- name: Disable Swap
+  include_tasks: swap.yml
 
-- include_tasks: init_cluster.yml
+- name: Initialize Master Node with Token
+  include_tasks: init_cluster.yml
 
-- include_tasks: network.yml
+- name: Setting up overlay network
+  include_tasks: network.yml
 
-- include_tasks: join_cluster.yml
+- name: Join additional nodes
+  include_tasks: join_cluster.yml
   when: >
     inventory_hostname != k8s_master
 
-- include_tasks: cluster_summary.yml
+- name: Display at node states
+  include_tasks: cluster_summary.yml
 
-- include_tasks: users.yml
+- name: Setting up user-based kubeconfig
+  include_tasks: users.yml
 
-- include_tasks: pods.yml
+- name: Display at pod states
+  include_tasks: pods.yml
   when: >
         k8s_cluster_init
         and (inventory_hostname == k8s_master)
 
-- include_tasks: cluster_services.yml
+- name: Display at service states
+  include_tasks: cluster_services.yml
   when: >
         k8s_cluster_init
         and (inventory_hostname == k8s_master)
 
-- include_tasks: helm.yml
+- name: Install and deploy helm resources
+  include_tasks: helm.yml
   when: >
     k8s_helm_install|bool
     and (inventory_hostname == k8s_master)
 
-- include_tasks: reset_cluster.yml
+- name: Reset the Kubernetes cluster
+  include_tasks: reset_cluster.yml
   when: >
     k8s_reset_cluster
