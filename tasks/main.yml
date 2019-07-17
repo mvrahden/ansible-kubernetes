@@ -21,13 +21,15 @@
 - name: Setting up overlay network
   include_tasks: network.yml
 
-- name: Join additional nodes
+- name: Join additional nodes (slaves)
   include_tasks: join_cluster.yml
   when: >
     inventory_hostname != k8s_master
 
 - name: Display at node states
   include_tasks: cluster_summary.yml
+  when: >
+    inventory_hostname == k8s_master
 
 - name: Setting up user-based kubeconfig
   include_tasks: users.yml
