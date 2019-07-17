@@ -32,7 +32,9 @@
         k8s_cluster_init
 
 - include_tasks: helm.yml
-  when: k8s_helm_install|bool
+  when: >
+    k8s_helm_install|bool
+    and (inventory_hostname == k8s_master)
 
 - include_tasks: reset_cluster.yml
   when: k8s_reset_cluster
