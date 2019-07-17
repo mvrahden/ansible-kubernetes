@@ -1,6 +1,6 @@
 ---
 - name: reset_cluster | Resetting Cluster
-  command: kubeadm reset -f
+  command: kubeadm reset {{ -f if k8s_version is version_compare(1.13.0, '>=') }}
   become: true
   tags:
     - k8s_reset
